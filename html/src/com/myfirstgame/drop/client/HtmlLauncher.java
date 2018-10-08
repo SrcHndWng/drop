@@ -3,6 +3,7 @@ package com.myfirstgame.drop.client;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
+import com.myfirstgame.drop.Const;
 import com.myfirstgame.drop.Drop;
 
 public class HtmlLauncher extends GwtApplication {
@@ -10,7 +11,7 @@ public class HtmlLauncher extends GwtApplication {
         // USE THIS CODE FOR A FIXED SIZE APPLICATION
         @Override
         public GwtApplicationConfiguration getConfig () {
-                return new GwtApplicationConfiguration(800, 480);
+                return new GwtApplicationConfiguration(Const.Viewport.width.getId(), Const.Viewport.height.getId());
         }
         @Override
         public ApplicationListener getApplicationListener () {

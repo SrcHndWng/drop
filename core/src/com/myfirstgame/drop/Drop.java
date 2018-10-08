@@ -28,54 +28,6 @@ public class Drop extends ApplicationAdapter {
 	private Array<Rectangle> raindrops;
 	private long lastDropTime;
 
-	private enum Viewport{
-		width(800),
-		height(480);
-
-		private final int id;
-
-		private Viewport(final int id) {
-			this.id = id;
-		}
-
-		public int getId() {
-			return this.id;
-		}
-	}
-
-	private enum Bucket {
-        width(64),
-        height(64),
-        aboveBottom(20),
-        slideWidth(200);
-
-        private final int id;
-
-        private Bucket(final int id) {
-            this.id = id;
-        }
-
-        public int getId() {
-            return this.id;
-        }
-    }
-
-    private enum Raindrop {
-        width(64),
-        height(64),
-        slideHeight(200);
-
-        private final int id;
-
-        private Raindrop(final int id) {
-            this.id = id;
-        }
-
-        public int getId() {
-            return this.id;
-        }
-    }
-
 	@Override
 	public void create () {
 		// load the images for the droplet and the bucket, 64x64 pixels each
@@ -92,15 +44,15 @@ public class Drop extends ApplicationAdapter {
 
 		// create the camera and the SpriteBatch
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, Viewport.width.getId(), Viewport.height.getId());
+		camera.setToOrtho(false, Const.Viewport.width.getId(), Const.Viewport.height.getId());
 		batch = new SpriteBatch();
 
 		// create a Rectangle to logically represent the bucket
 		bucket = new Rectangle();
-		bucket.x = Viewport.width.getId() / 2 - Bucket.width.getId() / 2; // center the bucket horizontally
-		bucket.y = Bucket.aboveBottom.getId(); // bottom left corner of the bucket is 20 pixels above the bottom screen edge
-		bucket.width = Bucket.width.getId();
-		bucket.height = Bucket.height.getId();
+		bucket.x = Const.Viewport.width.getId() / 2 - Const.Bucket.width.getId() / 2; // center the bucket horizontally
+		bucket.y = Const.Bucket.aboveBottom.getId(); // bottom left corner of the bucket is 20 pixels above the bottom screen edge
+		bucket.width = Const.Bucket.width.getId();
+		bucket.height = Const.Bucket.height.getId();
 
 		// create the raindrops array and spawn the first raindrop
 		raindrops = new Array<Rectangle>();
@@ -109,10 +61,10 @@ public class Drop extends ApplicationAdapter {
 
 	private void spawnRaindrop() {
 		Rectangle raindrop = new Rectangle();
-		raindrop.x = MathUtils.random(0, Viewport.width.getId()-Raindrop.width.getId());
-		raindrop.y = Viewport.height.getId();
-		raindrop.width = Raindrop.width.getId();
-		raindrop.height = Raindrop.height.getId();
+		raindrop.x = MathUtils.random(0, Const.Viewport.width.getId()-Const.Raindrop.width.getId());
+		raindrop.y = Const.Viewport.height.getId();
+		raindrop.width = Const.Raindrop.width.getId();
+		raindrop.height = Const.Raindrop.height.getId();
 		raindrops.add(raindrop);
 		lastDropTime = TimeUtils.nanoTime();
 	}
@@ -147,14 +99,14 @@ public class Drop extends ApplicationAdapter {
 			Vector3 touchPos = new Vector3();
 			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 			camera.unproject(touchPos);
-			bucket.x = touchPos.x - Bucket.width.getId() / 2;
+			bucket.x = touchPos.x - Const.Bucket.width.getId() / 2;
 		}
-		if(Gdx.input.isKeyPressed(Keys.LEFT)) bucket.x -= Bucket.slideWidth.getId() * Gdx.graphics.getDeltaTime();
-		if(Gdx.input.isKeyPressed(Keys.RIGHT)) bucket.x += Bucket.slideWidth.getId() * Gdx.graphics.getDeltaTime();
+		if(Gdx.input.isKeyPressed(Keys.LEFT)) bucket.x -= Const.Bucket.slideWidth.getId() * Gdx.graphics.getDeltaTime();
+		if(Gdx.input.isKeyPressed(Keys.RIGHT)) bucket.x += Const.Bucket.slideWidth.getId() * Gdx.graphics.getDeltaTime();
 
 		// make sure the bucket stays within the screen bounds
 		if(bucket.x < 0) bucket.x = 0;
-		if(bucket.x > Viewport.width.getId() - Bucket.width.getId()) bucket.x = Viewport.width.getId() - Bucket.width.getId();
+		if(bucket.x > Const.Viewport.width.getId() - Const.Bucket.width.getId()) bucket.x = Const.Viewport.width.getId() - Const.Bucket.width.getId();
 
 		// check if we need to create a new raindrop
 		if(TimeUtils.nanoTime() - lastDropTime > 1000000000) spawnRaindrop();
@@ -164,8 +116,8 @@ public class Drop extends ApplicationAdapter {
 		// a sound effect as well.
 		for (Iterator<Rectangle> iter = raindrops.iterator(); iter.hasNext(); ) {
 			Rectangle raindrop = iter.next();
-			raindrop.y -= Raindrop.slideHeight.getId() * Gdx.graphics.getDeltaTime();
-			if(raindrop.y + Raindrop.height.getId() < 0) iter.remove();
+			raindrop.y -= Const.Raindrop.slideHeight.getId() * Gdx.graphics.getDeltaTime();
+			if(raindrop.y + Const.Raindrop.height.getId() < 0) iter.remove();
 			if(raindrop.overlaps(bucket)) {
 				dropSound.play();
 				iter.remove();
