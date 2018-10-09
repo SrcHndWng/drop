@@ -52,4 +52,49 @@ public class Const {
         }
     }
 
+    public enum WelcomeMenu{
+        x(100),
+        y(150);
+
+        private final int id;
+
+        private WelcomeMenu(final int id) {
+            this.id = id;
+        }
+
+        public int getId() {
+            return this.id;
+        }
+    }
+
+    public enum TapMenu{
+        x(100),
+        y(100);
+
+        private final int id;
+
+        private TapMenu(final int id) {
+            this.id = id;
+        }
+
+        public int getId() {
+            return this.id;
+        }
+    }
+
+    public enum DropsCollected{
+        x(0),
+        y(480);
+
+        private final int id;
+
+        private DropsCollected(final int id) {
+            this.id = id;
+        }
+
+        public int getId() {
+            return this.id;
+        }
+    }
+
 }
