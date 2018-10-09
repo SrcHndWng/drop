@@ -7,3 +7,4 @@ LibGDXの[A simple game](https://github.com/libgdx/libgdx/wiki/A-simple-game)を
 以下を修正している。
 
 * 初期値をEnum化。
+* 一部のループ処理をLambda化。

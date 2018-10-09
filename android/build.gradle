@@ -18,7 +18,7 @@ android {
     }
     defaultConfig {
         applicationId "com.myfirstgame.Drop"
-        minSdkVersion 9
+        minSdkVersion 24
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -92,8 +92,8 @@ eclipse {
     }
 
     jdt {
-        sourceCompatibility = 1.6
-        targetCompatibility = 1.6
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
     }
 
     classpath {
