@@ -12,7 +12,7 @@ public class MainMenuScreen implements Screen {
     public MainMenuScreen(final Drop game) {
         this.game = game;
         this.camera = new OrthographicCamera();
-        this.camera.setToOrtho(false, Const.Viewport.width.getId(), Const.Viewport.height.getId());
+        this.camera.setToOrtho(false, Const.Viewport.width, Const.Viewport.height);
     }
 
     @Override
@@ -24,8 +24,8 @@ public class MainMenuScreen implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
 
         game.batch.begin();
-        game.font.draw(game.batch, "Welcome to Drop!!! ", Const.WelcomeMenu.x.getId(), Const.WelcomeMenu.y.getId());
-        game.font.draw(game.batch, "Tap anywhere to begin!", Const.TapMenu.x.getId(), Const.TapMenu.y.getId());
+        game.font.draw(game.batch, "Welcome to Drop!!! ", Const.DispStrings.Welcome.x, Const.DispStrings.Welcome.y);
+        game.font.draw(game.batch, "Tap anywhere to begin!", Const.DispStrings.Tap.x, Const.DispStrings.Tap.y);
         game.batch.end();
 
         if (Gdx.input.isTouched()) {

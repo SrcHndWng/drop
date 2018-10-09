@@ -9,8 +9,8 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "Drop";
-		config.width = Const.Viewport.width.getId();
-		config.height = Const.Viewport.height.getId();
+		config.width = (int)Const.Viewport.width;
+		config.height = (int)Const.Viewport.height;
 		new LwjglApplication(new Drop(), config);
 	}
 }

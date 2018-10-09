@@ -45,14 +45,14 @@ public class GameScreen implements Screen {
 
         // create the camera and the SpriteBatch
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, Const.Viewport.width.getId(), Const.Viewport.height.getId());
+        camera.setToOrtho(false, Const.Viewport.width, Const.Viewport.height);
 
         // create a Rectangle to logically represent the bucket
         bucket = new Rectangle();
-        bucket.x = Const.Viewport.width.getId() / 2 - Const.Bucket.width.getId() / 2; // center the bucket horizontally
-        bucket.y = Const.Bucket.aboveBottom.getId(); // bottom left corner of the bucket is 20 pixels above the bottom screen edge
-        bucket.width = Const.Bucket.width.getId();
-        bucket.height = Const.Bucket.height.getId();
+        bucket.x = Const.Viewport.width / 2 - Const.Bucket.width / 2; // center the bucket horizontally
+        bucket.y = Const.Bucket.aboveBottom; // bottom left corner of the bucket is 20 pixels above the bottom screen edge
+        bucket.width = Const.Bucket.width;
+        bucket.height = Const.Bucket.height;
 
         // create the raindrops array and spawn the first raindrop
         raindrops = new Array<Rectangle>();
@@ -61,10 +61,10 @@ public class GameScreen implements Screen {
 
     private void spawnRaindrop() {
         Rectangle raindrop = new Rectangle();
-        raindrop.x = MathUtils.random(0, Const.Viewport.width.getId()-Const.Raindrop.width.getId());
-        raindrop.y = Const.Viewport.height.getId();
-        raindrop.width = Const.Raindrop.width.getId();
-        raindrop.height = Const.Raindrop.height.getId();
+        raindrop.x = MathUtils.random(0, Const.Viewport.width -Const.Raindrop.width);
+        raindrop.y = Const.Viewport.height;
+        raindrop.width = Const.Raindrop.width;
+        raindrop.height = Const.Raindrop.height;
         raindrops.add(raindrop);
         lastDropTime = TimeUtils.nanoTime();
     }
@@ -88,7 +88,7 @@ public class GameScreen implements Screen {
         // begin a new batch and draw the bucket and
         // all drops
         game.batch.begin();
-        game.font.draw(game.batch, "Drops Collected: " + dropsGathered, Const.DropsCollected.x.getId(), Const.DropsCollected.y.getId());
+        game.font.draw(game.batch, "Drops Collected: " + dropsGathered, Const.DispStrings.DropCount.x, Const.DispStrings.DropCount.y);
         game.batch.draw(bucketImage, bucket.x, bucket.y);
         raindrops.forEach(r -> {
             game.batch.draw(dropImage, r.x, r.y);
@@ -100,14 +100,14 @@ public class GameScreen implements Screen {
             Vector3 touchPos = new Vector3();
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(touchPos);
-            bucket.x = touchPos.x - Const.Bucket.width.getId() / 2;
+            bucket.x = touchPos.x - Const.Bucket.width / 2;
         }
-        if(Gdx.input.isKeyPressed(Keys.LEFT)) bucket.x -= Const.Bucket.slideWidth.getId() * Gdx.graphics.getDeltaTime();
-        if(Gdx.input.isKeyPressed(Keys.RIGHT)) bucket.x += Const.Bucket.slideWidth.getId() * Gdx.graphics.getDeltaTime();
+        if(Gdx.input.isKeyPressed(Keys.LEFT)) bucket.x -= Const.Bucket.slideWidth * Gdx.graphics.getDeltaTime();
+        if(Gdx.input.isKeyPressed(Keys.RIGHT)) bucket.x += Const.Bucket.slideWidth * Gdx.graphics.getDeltaTime();
 
         // make sure the bucket stays within the screen bounds
         if(bucket.x < 0) bucket.x = 0;
-        if(bucket.x > Const.Viewport.width.getId() - Const.Bucket.width.getId()) bucket.x = Const.Viewport.width.getId() - Const.Bucket.width.getId();
+        if(bucket.x > Const.Viewport.width - Const.Bucket.width) bucket.x = Const.Viewport.width - Const.Bucket.width;
 
         // check if we need to create a new raindrop
         if(TimeUtils.nanoTime() - lastDropTime > 1000000000) spawnRaindrop();
@@ -118,7 +118,7 @@ public class GameScreen implements Screen {
         Iterator<Rectangle> iter = raindrops.iterator();
         while (iter.hasNext()) {
             Rectangle raindrop = iter.next();
-            raindrop.y -= Const.Raindrop.slideHeight.getId() * Gdx.graphics.getDeltaTime();
+            raindrop.y -= Const.Raindrop.slideHeight * Gdx.graphics.getDeltaTime();
             if (raindrop.y + 64 < 0)
                 iter.remove();
             if (raindrop.overlaps(bucket)) {

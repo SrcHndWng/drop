@@ -4,97 +4,36 @@ public class Const {
     private Const(){
     }
 
-    public enum Viewport{
-        width(800),
-        height(480);
-
-        private final int id;
-
-        private Viewport(final int id) {
-            this.id = id;
-        }
-
-        public int getId() {
-            return this.id;
-        }
+    public static class Viewport{
+        public static final float width = 800.0f;
+        public static final float height = 480.0f;
     }
 
-    public enum Bucket {
-        width(64),
-        height(64),
-        aboveBottom(20),
-        slideWidth(200);
-
-        private final int id;
-
-        private Bucket(final int id) {
-            this.id = id;
-        }
-
-        public int getId() {
-            return this.id;
-        }
+    public static class Bucket{
+        public static final float width = 64.0f;
+        public static final float height = 64.0f;
+        public static final float aboveBottom = 20.0f;
+        public static final float slideWidth = 200.0f;
     }
 
-    public enum Raindrop {
-        width(64),
-        height(64),
-        slideHeight(200);
-
-        private final int id;
-
-        private Raindrop(final int id) {
-            this.id = id;
-        }
-
-        public int getId() {
-            return this.id;
-        }
+    public static class Raindrop{
+        public static final float width = 64.0f;
+        public static final float height = 64.0f;
+        public static final float slideHeight = 200.0f;
     }
 
-    public enum WelcomeMenu{
-        x(100),
-        y(150);
-
-        private final int id;
-
-        private WelcomeMenu(final int id) {
-            this.id = id;
+    public static class DispStrings {
+        public static class Welcome{
+            public static float x = 100.0f;
+            public static float y = 150.0f;
         }
-
-        public int getId() {
-            return this.id;
+        public static class Tap{
+            public static float x = 100.0f;
+            public static float y = 100.0f;
         }
-    }
-
-    public enum TapMenu{
-        x(100),
-        y(100);
-
-        private final int id;
-
-        private TapMenu(final int id) {
-            this.id = id;
-        }
-
-        public int getId() {
-            return this.id;
+        public static class DropCount{
+            public static float x = 0.0f;
+            public static float y = 480.0f;
         }
     }
-
-    public enum DropsCollected{
-        x(0),
-        y(480);
-
-        private final int id;
-
-        private DropsCollected(final int id) {
-            this.id = id;
-        }
-
-        public int getId() {
-            return this.id;
-        }
-    }
-
 }
