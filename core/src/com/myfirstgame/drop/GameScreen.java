@@ -17,17 +17,17 @@ import com.badlogic.gdx.utils.TimeUtils;
 import java.util.Iterator;
 
 public class GameScreen implements Screen {
-    final Drop game;
+    private final Drop game;
 
-    Texture dropImage;
-    Texture bucketImage;
-    Sound dropSound;
-    Music rainMusic;
-    OrthographicCamera camera;
-    Rectangle bucket;
-    Array<Rectangle> raindrops;
-    long lastDropTime;
-    int dropsGathered;
+    private Texture dropImage;
+    private Texture bucketImage;
+    private Sound dropSound;
+    private Music rainMusic;
+    private OrthographicCamera camera;
+    private Rectangle bucket;
+    private Array<Rectangle> raindrops;
+    private long lastDropTime;
+    private int dropsGathered;
 
     public GameScreen(final Drop game) {
         this.game = game;
